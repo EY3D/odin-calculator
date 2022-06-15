@@ -14,17 +14,29 @@ function divide(a, b){
   return a/b;
 }
 
-function operate (a, b, operator){
+function operate(a, b, operator){
+  let result;
   if (operator == "+"){
-    add(a, b);
+    result = add(a, b);
+    return result;
   }
   else if (operator == "-"){
-    minus(a, b);
+    result = minus(a, b);
+    return result;
   }
   else if (operator == "*"){
-    multiply(a, b);
+    result = multiply(a, b);
+    return result;
   }
   else if (operator == "/"){
-    divide(a, b);
+    result = divide(a, b);
+    return result;
+  }
+  else{
+    return "failed";
   }
 }
+
+let c = 1;
+let d = 2;
+operate(c,d, "+");
