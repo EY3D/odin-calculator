@@ -33,8 +33,12 @@ button {
   display: flex;
 }
 
+#result {
+  margin-right: 10px;
+}
+
 #clears {
-  color: steelblue;
+  color: saddlebrown;
   font-weight: bold;
   font-size: 25px;
 }
@@ -56,9 +60,13 @@ button {
 }
 
 #adds {
-  color: darkgoldenrod;
+  color: goldenrod;
   font-weight: bold;
   font-size: 30px;
+}
+
+#dot {
+  font-weight: bold;
 }
 
 #equals {
