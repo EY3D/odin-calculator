@@ -29,6 +29,11 @@ function operate(a, b, operator){
     return result;
   }
   else if (operator == "/"){
+    if (b === 0){
+      result = "ERROR";
+      a = 0;
+      b = 0;
+    }
     result = divide(a, b);
     return result;
   }
@@ -37,15 +42,38 @@ function operate(a, b, operator){
     return result;
   }
 }
-
+function continueOperation(){
+  if (typeof resultValue === "string"){
+      parseFloat(resultValue);
+      console.log("parsed float: "+ resultValue);
+    }
+  resultValue = operate(a, b, operatorChosen);
+  a = resultValue;
+  b = 0;
+  operatorChosen = "";
+  checkMaxDigits();
+  updateResult();
+}
+  
 function checkMaxDigits(){
-  resultValue = Math.round(resultValue * 1000) / 1000;
-  if (a > 9999999999 || b > 9999999999)
-  resultValue = "ERROR";
-  //if (resultValue.toString().length > 12)
-  //{
-  //  resultValue = "ERROR";
-  //}
+  if (typeof resultValue === "number"){
+    resultValue = Math.round(resultValue * 1000) / 1000;
+    if (a > 9999999999 || b > 9999999999){
+    resultValue = "ERROR";
+    a = 0;
+    b = 0;
+    operatorChosen = "";
+    }
+  }
+
+  if (typeof resultValue === "string"){
+    if (resultValue.length > 11){
+    resultValue = "ERROR";
+    a = 0;
+    b = 0;
+    operatorChosen = "";
+    }
+  }
 }
 
 function updateResult(){
@@ -53,7 +81,7 @@ function updateResult(){
   resultQuery.appendChild(resultText);
 }
 
-let resultValue;
+let resultValue = 0;
 let a = 0;
 let b = 0;
 let operatorChosen = "";
@@ -81,30 +109,51 @@ const btnAdds = document.querySelector("#adds");
 const btnEquals = document.querySelector("#equals");
 
 btn0.addEventListener("click", () => {
+  if (typeof resultValue === "string" && operatorChosen === ""){
+    if (resultValue.includes(".") == true){
+    resultValue += "0";
+    checkMaxDigits();
+    updateResult();
+    return;
+    }
+  }
+
   if (operatorChosen === ""){
     a *= 10;
     resultValue = a;
   }
     
-  else if (resultValue.includes(".") == true){
-    console.log("boom");
-  }
-    
   else{
+    if (typeof resultValue === "string"){
+      parseFloat(resultValue);
+    }
     b *= 10;
     resultValue = b;
   }
+  
   checkMaxDigits();
   updateResult();
 })
 
 btn1.addEventListener("click", () => {
+  if (typeof resultValue === "string" && operatorChosen === ""){
+    if (resultValue.includes(".") == true){
+    resultValue += "1";
+    checkMaxDigits();
+    updateResult();
+    return;
+    }
+  }
+  
   if (operatorChosen === ""){
     a *= 10;
     a += 1;
     resultValue = a;
   }
   else{
+    if (typeof resultValue === "string"){
+      parseFloat(resultValue);
+    }
     b *= 10;
     b += 1;
     resultValue = b;
@@ -114,12 +163,24 @@ btn1.addEventListener("click", () => {
 })
 
 btn2.addEventListener("click", () => {
+  if (typeof resultValue === "string" && operatorChosen === ""){
+    if (resultValue.includes(".") == true){
+    resultValue += "2";
+    checkMaxDigits();
+    updateResult();
+    return;
+    }
+  }
+
   if (operatorChosen === ""){
     a *= 10;
     a += 2;
     resultValue = a;
   }
   else{
+    if (typeof resultValue === "string"){
+      parseFloat(resultValue);
+    }
     b *= 10;
     b += 2;
     resultValue = b;
@@ -129,12 +190,22 @@ btn2.addEventListener("click", () => {
 })
 
 btn3.addEventListener("click", () => {
+  if (resultValue.includes(".") == true){
+    resultValue += "3";
+    updateResult();
+    return;
+  }
+  
   if (operatorChosen === ""){
     a *= 10;
     a += 3;
     resultValue = a;
   }
+    
   else{
+    if (typeof resultValue === "string"){
+      parseFloat(resultValue);
+    }
     b *= 10;
     b += 3;
     resultValue = b;
@@ -144,12 +215,21 @@ btn3.addEventListener("click", () => {
 })
 
 btn4.addEventListener("click", () => {
+  if (resultValue.includes(".") == true){
+    resultValue += "4";
+    updateResult();
+    return;
+  }
+  
   if (operatorChosen === ""){
     a *= 10;
     a += 4;
     resultValue = a;
   }
   else{
+    if (typeof resultValue === "string"){
+      parseFloat(resultValue);
+    }
     b *= 10;
     b += 4;
     resultValue = b;
@@ -159,12 +239,21 @@ btn4.addEventListener("click", () => {
 })
 
 btn5.addEventListener("click", () => {
+  if (resultValue.includes(".") == true){
+    resultValue += "5";
+    updateResult();
+    return;
+  }
+  
   if (operatorChosen === ""){
     a *= 10;
     a += 5;
     resultValue = a;
   }
   else{
+    if (typeof resultValue === "string"){
+      parseFloat(resultValue);
+    }
     b *= 10;
     b += 5;
     resultValue = b;
@@ -174,12 +263,21 @@ btn5.addEventListener("click", () => {
 })
 
 btn6.addEventListener("click", () => {
+  if (resultValue.includes(".") == true){
+    resultValue += "6";
+    updateResult();
+    return;
+  }
+  
   if (operatorChosen === ""){
     a *= 10;
     a += 6;
     resultValue = a;
   }
   else{
+    if (typeof resultValue === "string"){
+      parseFloat(resultValue);
+    }
     b *= 10;
     b += 6;
     resultValue = b;
@@ -189,12 +287,21 @@ btn6.addEventListener("click", () => {
 })
 
 btn7.addEventListener("click", () => {
+  if (resultValue.includes(".") == true){
+    resultValue += "7";
+    updateResult();
+    return;
+  }
+  
   if (operatorChosen === ""){
     a *= 10;
     a += 7;
     resultValue = a;
   }
   else{
+    if (typeof resultValue === "string"){
+      parseFloat(resultValue);
+    }
     b *= 10;
     b += 7;
     resultValue = b;
@@ -204,12 +311,21 @@ btn7.addEventListener("click", () => {
 })
 
 btn8.addEventListener("click", () => {
+  if (resultValue.includes("8") == true){
+    resultValue += "1";
+    updateResult();
+    return;
+  }
+  
   if (operatorChosen === ""){
     a *= 10;
     a += 8;
     resultValue = a;
   }
   else{
+    if (typeof resultValue === "string"){
+      parseFloat(resultValue);
+    }
     b *= 10;
     b += 8;
     resultValue = b;
@@ -219,12 +335,21 @@ btn8.addEventListener("click", () => {
 })
 
 btn9.addEventListener("click", () => {
+  if (resultValue.includes(".") == true){
+    resultValue += "9";
+    updateResult();
+    return;
+  }
+  
   if (operatorChosen === ""){
     a *= 10;
     a += 9;
     resultValue = a;
   }
   else{
+    if (typeof resultValue === "string"){
+      parseFloat(resultValue);
+    }
     b *= 10;
     b += 9;
     resultValue = b;
@@ -253,22 +378,31 @@ btnClears.addEventListener("click", () => {
 })
 
 btnDivides.addEventListener("click", () => {
+  if (operatorChosen !== "") continueOperation();
   operatorChosen = "/";
 })
 
 btnMultiplies.addEventListener("click", () => {
+  if (operatorChosen !== "") continueOperation();
   operatorChosen = "*";
 })
 
 btnSubtracts.addEventListener("click", () => {
+  if (operatorChosen !== "") continueOperation();
   operatorChosen = "-";
 })
 
 btnAdds.addEventListener("click", () => {
+  if (operatorChosen !== "") continueOperation();
   operatorChosen = "+";
 })
 
 btnEquals.addEventListener("click", () => {
+  if (typeof resultValue === "string"){
+    parseFloat(resultValue);
+    console.log("parse float: " + resultValue);
+  }
+  console.log(a + "_" + b+ "_" + resultValue);
   resultValue = operate(a, b, operatorChosen);
   a = resultValue;
   b = 0;
