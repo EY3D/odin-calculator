@@ -46,10 +46,11 @@ function operate(a, b, operator){
     return result;
   }
   else if (operator == "/"){
-    if (b === 0){
+    if (b == 0){
       result = "ERROR";
       a = 0;
       b = 0;
+      return result;
     }
     result = divide(a, b);
     return result;
