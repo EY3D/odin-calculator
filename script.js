@@ -77,21 +77,50 @@ function continueOperation(){
   checkMaxDigits();
   updateResult();
 }
+
+function displayError(){
+  resultValueStr = "ERROR";
+  a = "";
+  b = "";
+  aNum = 0;
+  bNum = 0;
+  resultValueNum = 0;
+  operatorChosen = "";
+}
   
 function checkMaxDigits(){
   console.log("a: " + a + " and " + "b: " + b);
-  if (resultValueStr.includes(".") && resultValueStr.length > 6){
+
+  if (resultValueStr.includes(".") && resultValueStr.length > 8){
     resultValueNum = Math.round(resultValueNum * 1000) / 1000;
     resultValueStr = resultValueNum.toString();
+    if (resultValueStr.length > 10) displayError();
+    return;
   }
   
-  if (a.length > 10 || b.length > 10){
-    resultValueStr = "ERROR";
+  // if (resultValueStr.includes(".")){
+  //   resultValueNum = Math.round(resultValueNum * 1000) / 1000;
+  //   resultValueStr = resultValueNum.toString();
+  //   if (resultValueStr.length > 10) displayError();
+  //   return;
+  // }
+
+  if (a.includes(".") === false && b.includes(".") === false){
+    if (a.length > 10 || b.length > 10){
+      displayError();
+    }
+
+    if (resultValueStr.length > 9){
+      displayError();
+    }
+  }
+}
+
+function checkError(){
+  if (resultValueStr === "ERROR"){
     a = "";
     b = "";
-    aNum = 0;
-    bNum = 0;
-    resultValueNum = 0;
+    resultValueStr = "";
     operatorChosen = "";
   }
 }
@@ -131,162 +160,168 @@ const btnAdds = document.querySelector("#adds");
 const btnEquals = document.querySelector("#equals");
 
 btn0.addEventListener("click", () => {
-
+  checkError();  
   if (operatorChosen === ""){
-    if(a.length > 9) return;
+    if(a.length > 8) return;
     a += "0";
     resultValueStr = a;
   }
     
   else{
-    if(b.length > 9) return;
+    if(b.length > 8) return;
+    if(b === "0") b = "";
     b += "0";
     resultValueStr = b;
   }
-  checkMaxDigits();
   updateResult();
 })
 
 btn1.addEventListener("click", () => {
-  
+  checkError();
   if (operatorChosen === ""){
-    if(a.length > 9) return;
+    if(a.length > 8) return;
     a += "1";
     resultValueStr = a;
   }
   else{
-    if(b.length > 9) return;
+    if(b.length > 8) return;
+    if(b === "0") b = "";
     b += "1";
     resultValueStr = b;
   }
-  checkMaxDigits();
   updateResult();
 })
 
 btn2.addEventListener("click", () => {
+  checkError();  
   if (operatorChosen === ""){
-    if(a.length > 9) return;
+    if(a.length > 8) return;
     a += "2";
     resultValueStr = a;
   }
   else{
-    if(b.length > 9) return;
+    if(b.length > 8) return;
+    if(b === "0") b = "";
     b += "2";
     resultValueStr = b;
   }
-  checkMaxDigits();
   updateResult();
 })
 
 btn3.addEventListener("click", () => {
+  checkError();  
   if (operatorChosen === ""){
-    if(a.length > 9) return;
+    if(a.length > 8) return;
     a += "3";
     resultValueStr = a;
   }
   else{
-    if(b.length > 9) return;
+    if(b.length > 8) return;
+    if(b === "0") b = "";
     b += "3";
     resultValueStr = b;
   }
-  checkMaxDigits();
   updateResult();
 })
 
 btn4.addEventListener("click", () => {
-
+  checkError();  
   if (operatorChosen === ""){
-    if(a.length > 9) return;
+    if(a.length > 8) return;
     a += "4";
     resultValueStr = a;
   }
   else{
-    if(b.length > 9) return;
+    if(b.length > 8) return;
+    if(b === "0") b = "";
     b += "4";
     resultValueStr = b;
   }
-  checkMaxDigits();
   updateResult();
 })
 
 btn5.addEventListener("click", () => {
-
+  checkError();  
   if (operatorChosen === ""){
-    if(a.length > 9) return;
+    if(a.length > 8) return;
     a += "5";
     resultValueStr = a;
   }
   else{
-    if(b.length > 9) return;
+    if(b.length > 8) return;
+    if(b === "0") b = "";
     b += "5";
     resultValueStr = b;
   }
-  checkMaxDigits();
   updateResult();
 })
 
 btn6.addEventListener("click", () => {
-
+  checkError();  
   if (operatorChosen === ""){
-    if(a.length > 9) return;
+    if(a.length > 8) return;
     a += "6";
     resultValueStr = a;
   }
   else{
-    if(b.length > 9) return;
+    if(b.length > 8) return;
+    if(b === "0") b = "";
     b += "6";
     resultValueStr = b;
   }
-  checkMaxDigits();
   updateResult();
 })
 
 btn7.addEventListener("click", () => {
+  checkError();  
   if (operatorChosen === ""){
-    if(a.length > 9) return;
+    if(a.length > 8) return;
     a += "7";
     resultValueStr = a;
   }
   else{
-    if(b.length > 9) return;
+    if(b.length > 8) return;
+    if(b === "0") b = "";
     b += "7";
     resultValueStr = b;
   }
-  checkMaxDigits();
   updateResult();
 })
 
 btn8.addEventListener("click", () => {
+  checkError();  
   if (operatorChosen === ""){
-    if(a.length > 9) return;
+    if(a.length > 8) return;
     a += "8";
     resultValueStr = a;
   }
   else{
-    if(b.length > 9) return;
+    if(b.length > 8) return;
+    if(b === "0") b = "";
     b += "8";
     resultValueStr = b;
   }
-  checkMaxDigits();
   updateResult();
 })
 
 btn9.addEventListener("click", () => {
+  checkError();  
   if (operatorChosen === ""){
-    if(a.length > 9) return;
+    if(a.length > 8) return;
     a += "9";
     resultValueStr = a;
   }
   else{
-    if(b.length > 9) return;
+    if(b.length > 8) return;
+    if(b === "0") b = "";
     b += "9";
     resultValueStr = b;
   }
-  checkMaxDigits();
   updateResult();
 })
 
 btnDot.addEventListener("click", () => {
+  checkError();  
   if (resultValueStr.includes(".")){
     console.log(". found");
     return;
@@ -300,14 +335,14 @@ btnDot.addEventListener("click", () => {
     b += "0";
   }
   
-  if (resultValueStr.includes(".") === false && operatorChosen === ""){
+  if (a.includes(".") === false && operatorChosen === ""){
     console.log("adding . to a");
     a += ".";
     updateResult();
     return;
   }
 
-  if (resultValueStr.includes(".") === false){
+  if (b.includes(".") === false){
     console.log("adding . to b")
     b += ".";
     updateResult();
