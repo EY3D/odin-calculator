@@ -76,7 +76,7 @@ function checkMaxDigits(){
     resultValueStr = resultValueNum.toString();
   }
   
-  if (a.length > 9 || b.length > 9){
+  if (a.length > 10 || b.length > 10){
     resultValueStr = "ERROR";
     a = "";
     b = "";
@@ -308,21 +308,38 @@ btnClears.addEventListener("click", () => {
 })
 
 btnDivides.addEventListener("click", () => {
+  if (b === ""){
+    operatorChosen = "/";
+    return;
+  }
+  
   if (operatorChosen !== "") continueOperation();
   operatorChosen = "/";
 })
 
 btnMultiplies.addEventListener("click", () => {
+  if (b === ""){
+  operatorChosen = "*";
+  return;
+  }
   if (operatorChosen !== "") continueOperation();
   operatorChosen = "*";
 })
 
 btnSubtracts.addEventListener("click", () => {
+  if (b === ""){
+    operatorChosen = "-";
+    return;
+  }
   if (operatorChosen !== "") continueOperation();
   operatorChosen = "-";
 })
 
 btnAdds.addEventListener("click", () => {
+  if (b === ""){
+  operatorChosen = "+";
+  return;
+  }
   if (operatorChosen !== "") continueOperation();
   operatorChosen = "+";
 })
