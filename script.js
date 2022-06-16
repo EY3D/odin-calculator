@@ -18,11 +18,11 @@ function operate(a, b, operator){
   let result;
   
   if (typeof a === "string"){
-    parseFloat(a);
+    a = parseFloat(a);
   }
   
   if (typeof b === "string"){
-    parseFloat(b);
+    b = parseFloat(b);
   }
   
   if (operator == "+"){
@@ -56,51 +56,47 @@ function debugValues(){
   console.log(typeof a + " " + a);
   console.log(operatorChosen);
   console.log(typeof b + " " + b);
-  console.log(typeof resultValue + " " + resultValue);
+  console.log(typeof resultValueStr + " " + resultValueStr);
 }
 
 function continueOperation(){
-  if (typeof resultValue === "string"){
-      parseFloat(resultValue);
-      console.log("parsed float: "+ resultValue);
-    }
-  resultValue = operate(a, b, operatorChosen);
-  a = resultValue;
-  b = 0;
+  resultValueNum = operate(a, b, operatorChosen);
+  resultValueStr = resultValueNum.toString();
+  a = resultValueStr;
+  b = "";
   operatorChosen = "";
   checkMaxDigits();
   updateResult();
 }
   
 function checkMaxDigits(){
-  if (typeof resultValue === "number"){
-    resultValue = Math.round(resultValue * 1000) / 1000;
-    if (a > 9999999999 || b > 9999999999){
-    resultValue = "ERROR";
-    a = 0;
-    b = 0;
-    operatorChosen = "";
-    }
+  console.log("a: " + a + " and " + "b: " + b);
+  if (resultValueStr.includes(".") && resultValueStr.length > 6){
+    resultValueNum = Math.round(resultValueNum * 1000) / 1000;
+    resultValueStr = resultValueNum.toString();
   }
-
-  if (typeof resultValue === "string"){
-    if (resultValue.length > 11){
-    resultValue = "ERROR";
-    a = 0;
-    b = 0;
+  
+  if (a.length > 10 || b.length > 10){
+    resultValueStr = "ERROR";
+    a = "";
+    b = "";
+    aNum = 0;
+    bNum = 0;
+    resultValueNum = 0;
     operatorChosen = "";
-    }
   }
 }
 
 function updateResult(){
-  resultText.textContent = resultValue;
+  console.log("resultValueStr: " + resultValueStr);
+  resultText.textContent = resultValueStr;
   resultQuery.appendChild(resultText);
 }
 
-let resultValue = 0;
-let a = 0;
-let b = 0;
+let resultValueStr = "";
+let resultValueNum = 0;
+let a = "";
+let b = "";
 let operatorChosen = "";
 
 const resultText = document.createElement("span");
@@ -126,308 +122,237 @@ const btnAdds = document.querySelector("#adds");
 const btnEquals = document.querySelector("#equals");
 
 btn0.addEventListener("click", () => {
-  if (typeof resultValue === "string" && operatorChosen === ""){
-    resultValue += "0";
-    resultValue = parseFloat(resultValue);
-    checkMaxDigits();
-    updateResult();
-    return;
-  }
 
   if (operatorChosen === ""){
-    a *= 10;
-    resultValue = a;
+    if(a.length > 9) return;
+    a += "0";
+    resultValueStr = a;
   }
     
   else{
-    if (typeof resultValue === "string"){
-      parseFloat(resultValue);
-    }
-    b *= 10;
-    resultValue = b;
+    if(b.length > 9) return;
+    b += "0";
+    resultValueStr = b;
   }
-  
   checkMaxDigits();
   updateResult();
 })
 
 btn1.addEventListener("click", () => {
-  if (typeof resultValue === "string" && operatorChosen === ""){
-    resultValue += "1";
-    resultValue = parseFloat(resultValue);
-    checkMaxDigits();
-    updateResult();
-    return;
-  }
   
   if (operatorChosen === ""){
-    a *= 10;
-    a += 1;
-    resultValue = a;
+    if(a.length > 9) return;
+    a += "1";
+    resultValueStr = a;
   }
   else{
-    if (typeof resultValue === "string"){
-      parseFloat(resultValue);
-    }
-    b *= 10;
-    b += 1;
-    resultValue = b;
+    if(b.length > 9) return;
+    b += "1";
+    resultValueStr = b;
   }
   checkMaxDigits();
   updateResult();
 })
 
 btn2.addEventListener("click", () => {
-  if (typeof resultValue === "string" && operatorChosen === ""){
-    resultValue = resultValue += "2";
-    parseFloat(resultValue);
-    checkMaxDigits();
-    updateResult();
-    return;
-  }
-
   if (operatorChosen === ""){
-    a *= 10;
-    a += 2;
-    resultValue = a;
+    if(a.length > 9) return;
+    a += "2";
+    resultValueStr = a;
   }
   else{
-    if (typeof resultValue === "string"){
-      parseFloat(resultValue);
-    }
-    b *= 10;
-    b += 2;
-    resultValue = b;
+    if(b.length > 9) return;
+    b += "2";
+    resultValueStr = b;
   }
   checkMaxDigits();
   updateResult();
 })
 
 btn3.addEventListener("click", () => {
-  if (typeof resultValue === "string" && operatorChosen === ""){
-    resultValue += "3";
-    parseFloat(resultValue);
-    checkMaxDigits();
-    updateResult();
-    return;
-  }
-  
   if (operatorChosen === ""){
-    a *= 10;
-    a += 3;
-    resultValue = a;
+    if(a.length > 9) return;
+    a += "3";
+    resultValueStr = a;
   }
-    
   else{
-    if (typeof resultValue === "string"){
-      parseFloat(resultValue);
-    }
-    b *= 10;
-    b += 3;
-    resultValue = b;
+    if(b.length > 9) return;
+    b += "3";
+    resultValueStr = b;
   }
   checkMaxDigits();
   updateResult();
 })
 
 btn4.addEventListener("click", () => {
-  if (typeof resultValue === "string" && operatorChosen === ""){
-    resultValue += "4";
-    checkMaxDigits();
-    updateResult();
-    return;
-  }
-  
+
   if (operatorChosen === ""){
-    a *= 10;
-    a += 4;
-    resultValue = a;
+    if(a.length > 9) return;
+    a += "4";
+    resultValueStr = a;
   }
   else{
-    if (typeof resultValue === "string"){
-      parseFloat(resultValue);
-    }
-    b *= 10;
-    b += 4;
-    resultValue = b;
+    if(b.length > 9) return;
+    b += "4";
+    resultValueStr = b;
   }
   checkMaxDigits();
   updateResult();
 })
 
 btn5.addEventListener("click", () => {
-  if (typeof resultValue === "string" && operatorChosen === ""){
-    resultValue += "5";
-    checkMaxDigits();
-    updateResult();
-    return;
-  }
-  
+
   if (operatorChosen === ""){
-    a *= 10;
-    a += 5;
-    resultValue = a;
+    if(a.length > 9) return;
+    a += "5";
+    resultValueStr = a;
   }
   else{
-    if (typeof resultValue === "string"){
-      parseFloat(resultValue);
-    }
-    b *= 10;
-    b += 5;
-    resultValue = b;
+    if(b.length > 9) return;
+    b += "5";
+    resultValueStr = b;
   }
   checkMaxDigits();
   updateResult();
 })
 
 btn6.addEventListener("click", () => {
-  if (typeof resultValue === "string" && operatorChosen === ""){
-    resultValue += "6";
-    checkMaxDigits();
-    updateResult();
-    return;
-  }
-  
+
   if (operatorChosen === ""){
-    a *= 10;
-    a += 6;
-    resultValue = a;
+    if(a.length > 9) return;
+    a += "6";
+    resultValueStr = a;
   }
   else{
-    if (typeof resultValue === "string"){
-      parseFloat(resultValue);
-    }
-    b *= 10;
-    b += 6;
-    resultValue = b;
+    if(b.length > 9) return;
+    b += "6";
+    resultValueStr = b;
   }
   checkMaxDigits();
   updateResult();
 })
 
 btn7.addEventListener("click", () => {
-  if (typeof resultValue === "string" && operatorChosen === ""){
-    resultValue += "7";
-    checkMaxDigits();
-    updateResult();
-    return;
-  }
-  
   if (operatorChosen === ""){
-    a *= 10;
-    a += 7;
-    resultValue = a;
+    if(a.length > 9) return;
+    a += "7";
+    resultValueStr = a;
   }
   else{
-    if (typeof resultValue === "string"){
-      parseFloat(resultValue);
-    }
-    b *= 10;
-    b += 7;
-    resultValue = b;
+    if(b.length > 9) return;
+    b += "7";
+    resultValueStr = b;
   }
   checkMaxDigits();
   updateResult();
 })
 
 btn8.addEventListener("click", () => {
-  if (typeof resultValue === "string" && operatorChosen === ""){
-    resultValue += "1";
-    checkMaxDigits();
-    updateResult();
-    return;
-  }
-  
   if (operatorChosen === ""){
-    a *= 10;
-    a += 8;
-    resultValue = a;
+    if(a.length > 9) return;
+    a += "8";
+    resultValueStr = a;
   }
   else{
-    if (typeof resultValue === "string"){
-      parseFloat(resultValue);
-    }
-    b *= 10;
-    b += 8;
-    resultValue = b;
+    if(b.length > 9) return;
+    b += "8";
+    resultValueStr = b;
   }
   checkMaxDigits();
   updateResult();
 })
 
 btn9.addEventListener("click", () => {
-  if (typeof resultValue === "string" && operatorChosen === ""){
-    resultValue += "9";
-    checkMaxDigits();
-    updateResult();
-    return;
-  }
-  
   if (operatorChosen === ""){
-    a *= 10;
-    a += 9;
-    resultValue = a;
+    if(a.length > 9) return;
+    a += "9";
+    resultValueStr = a;
   }
   else{
-    if (typeof resultValue === "string"){
-      parseFloat(resultValue);
-    }
-    b *= 10;
-    b += 9;
-    resultValue = b;
+    if(b.length > 9) return;
+    b += "9";
+    resultValueStr = b;
   }
   checkMaxDigits();
   updateResult();
 })
 
 btnDot.addEventListener("click", () => {
-  if (typeof resultValue === "number"){
-    resultValue.toString();
-    resultValue += "."
-    updateResult();
+  if (resultValueStr.includes(".")){
+    console.log(". found");
+    return;
   }
-  else{
+  
+  if (resultValueStr.includes(".") === false && operatorChosen === ""){
+    console.log("adding . to a");
+    a += ".";
+    updateResult();
+    return;
+  }
+
+  if (resultValueStr.includes(".") === false){
+    console.log("adding . to b")
+    b += ".";
+    updateResult();
     return;
   }
 })
 
 btnClears.addEventListener("click", () => {
-  a = 0;
-  b = 0;
-  resultValue = 0;
+  a = "";
+  b = "";
+  resultValueNum = 0;
+  resultValueStr = "";
   operatorChosen = "";
   updateResult();
 })
 
 btnDivides.addEventListener("click", () => {
+  if (b === ""){
+    operatorChosen = "/";
+    return;
+  }
+  
   if (operatorChosen !== "") continueOperation();
   operatorChosen = "/";
 })
 
 btnMultiplies.addEventListener("click", () => {
+  if (b === ""){
+  operatorChosen = "*";
+  return;
+  }
   if (operatorChosen !== "") continueOperation();
   operatorChosen = "*";
 })
 
 btnSubtracts.addEventListener("click", () => {
+  if (b === ""){
+    operatorChosen = "-";
+    return;
+  }
   if (operatorChosen !== "") continueOperation();
   operatorChosen = "-";
 })
 
 btnAdds.addEventListener("click", () => {
+  if (b === ""){
+  operatorChosen = "+";
+  return;
+  }
   if (operatorChosen !== "") continueOperation();
   operatorChosen = "+";
 })
 
 btnEquals.addEventListener("click", () => {
-  resultValue = operate(a, b, operatorChosen);
+  resultValueNum = operate(a, b, operatorChosen);
+  resultValueStr = resultValueNum.toString();
   debugValues();
-  a = resultValue;
-  b = 0;
-  operatorChosen = "";
   checkMaxDigits();
   updateResult();
-  resultValue = 0;
+  a = resultValueStr;
+  b = "";
+  operatorChosen = "";
   }
 )
 
