@@ -16,6 +16,15 @@ function divide(a, b){
 
 function operate(a, b, operator){
   let result;
+  
+  if (typeof a === "string"){
+    parseFloat(a);
+  }
+  
+  if (typeof b === "string"){
+    parseFloat(b);
+  }
+  
   if (operator == "+"){
     result = add(a, b);
     return result;
@@ -42,6 +51,14 @@ function operate(a, b, operator){
     return result;
   }
 }
+
+function debugValues(){
+  console.log(typeof a + " " + a);
+  console.log(operatorChosen);
+  console.log(typeof b + " " + b);
+  console.log(typeof resultValue + " " + resultValue);
+}
+
 function continueOperation(){
   if (typeof resultValue === "string"){
       parseFloat(resultValue);
@@ -110,12 +127,11 @@ const btnEquals = document.querySelector("#equals");
 
 btn0.addEventListener("click", () => {
   if (typeof resultValue === "string" && operatorChosen === ""){
-    if (resultValue.includes(".") == true){
     resultValue += "0";
+    resultValue = parseFloat(resultValue);
     checkMaxDigits();
     updateResult();
     return;
-    }
   }
 
   if (operatorChosen === ""){
@@ -137,12 +153,11 @@ btn0.addEventListener("click", () => {
 
 btn1.addEventListener("click", () => {
   if (typeof resultValue === "string" && operatorChosen === ""){
-    if (resultValue.includes(".") == true){
     resultValue += "1";
+    resultValue = parseFloat(resultValue);
     checkMaxDigits();
     updateResult();
     return;
-    }
   }
   
   if (operatorChosen === ""){
@@ -164,12 +179,11 @@ btn1.addEventListener("click", () => {
 
 btn2.addEventListener("click", () => {
   if (typeof resultValue === "string" && operatorChosen === ""){
-    if (resultValue.includes(".") == true){
-    resultValue += "2";
+    resultValue = resultValue += "2";
+    parseFloat(resultValue);
     checkMaxDigits();
     updateResult();
     return;
-    }
   }
 
   if (operatorChosen === ""){
@@ -190,8 +204,10 @@ btn2.addEventListener("click", () => {
 })
 
 btn3.addEventListener("click", () => {
-  if (resultValue.includes(".") == true){
+  if (typeof resultValue === "string" && operatorChosen === ""){
     resultValue += "3";
+    parseFloat(resultValue);
+    checkMaxDigits();
     updateResult();
     return;
   }
@@ -215,8 +231,9 @@ btn3.addEventListener("click", () => {
 })
 
 btn4.addEventListener("click", () => {
-  if (resultValue.includes(".") == true){
+  if (typeof resultValue === "string" && operatorChosen === ""){
     resultValue += "4";
+    checkMaxDigits();
     updateResult();
     return;
   }
@@ -239,8 +256,9 @@ btn4.addEventListener("click", () => {
 })
 
 btn5.addEventListener("click", () => {
-  if (resultValue.includes(".") == true){
+  if (typeof resultValue === "string" && operatorChosen === ""){
     resultValue += "5";
+    checkMaxDigits();
     updateResult();
     return;
   }
@@ -263,8 +281,9 @@ btn5.addEventListener("click", () => {
 })
 
 btn6.addEventListener("click", () => {
-  if (resultValue.includes(".") == true){
+  if (typeof resultValue === "string" && operatorChosen === ""){
     resultValue += "6";
+    checkMaxDigits();
     updateResult();
     return;
   }
@@ -287,8 +306,9 @@ btn6.addEventListener("click", () => {
 })
 
 btn7.addEventListener("click", () => {
-  if (resultValue.includes(".") == true){
+  if (typeof resultValue === "string" && operatorChosen === ""){
     resultValue += "7";
+    checkMaxDigits();
     updateResult();
     return;
   }
@@ -311,8 +331,9 @@ btn7.addEventListener("click", () => {
 })
 
 btn8.addEventListener("click", () => {
-  if (resultValue.includes("8") == true){
+  if (typeof resultValue === "string" && operatorChosen === ""){
     resultValue += "1";
+    checkMaxDigits();
     updateResult();
     return;
   }
@@ -335,8 +356,9 @@ btn8.addEventListener("click", () => {
 })
 
 btn9.addEventListener("click", () => {
-  if (resultValue.includes(".") == true){
+  if (typeof resultValue === "string" && operatorChosen === ""){
     resultValue += "9";
+    checkMaxDigits();
     updateResult();
     return;
   }
@@ -398,12 +420,8 @@ btnAdds.addEventListener("click", () => {
 })
 
 btnEquals.addEventListener("click", () => {
-  if (typeof resultValue === "string"){
-    parseFloat(resultValue);
-    console.log("parse float: " + resultValue);
-  }
-  console.log(a + "_" + b+ "_" + resultValue);
   resultValue = operate(a, b, operatorChosen);
+  debugValues();
   a = resultValue;
   b = 0;
   operatorChosen = "";
