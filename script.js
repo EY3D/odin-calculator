@@ -17,6 +17,14 @@ function divide(a, b){
 function operate(a, b, operator){
   let result;
   
+  if (a === ""){
+    a = "0";
+  }
+
+  if (b === ""){
+    b = "0";
+  }
+  
   if (typeof a === "string"){
     a = parseFloat(a);
   }
@@ -282,6 +290,14 @@ btnDot.addEventListener("click", () => {
     console.log(". found");
     return;
   }
+
+  if (a === ""){
+    a += "0";
+  }
+
+  if (b === ""){
+    b += "0";
+  }
   
   if (resultValueStr.includes(".") === false && operatorChosen === ""){
     console.log("adding . to a");
@@ -345,6 +361,9 @@ btnAdds.addEventListener("click", () => {
 })
 
 btnEquals.addEventListener("click", () => {
+  if (b === "" || operatorChosen === ""){
+    return;
+  }
   resultValueNum = operate(a, b, operatorChosen);
   resultValueStr = resultValueNum.toString();
   debugValues();
