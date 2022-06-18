@@ -48,15 +48,15 @@ function operate(a, b, operator){
   else if (operator == "/"){
     if (b == 0){
       result = "ERROR";
-      a = 0;
-      b = 0;
+      a = "";
+      b = "";
       return result;
     }
     result = divide(a, b);
     return result;
   }
   else{
-    result = 0;
+    result = "";
     return result;
   }
 }
@@ -69,8 +69,11 @@ function debugValues(){
 }
 
 function continueOperation(){
+  limitDecimlaPlaces(a);
+  limitDecimlaPlaces(b);
   resultValueNum = operate(a, b, operatorChosen);
   resultValueStr = resultValueNum.toString();
+  limitDecimlaPlaces(resultValueStr);
   a = resultValueStr;
   b = "";
   operatorChosen = "";
@@ -87,23 +90,24 @@ function displayError(){
   resultValueNum = 0;
   operatorChosen = "";
 }
-  
+
+function limitDecimlaPlaces(x)
+{
+  if (x.includes(".")){
+    x = Math.round(x * 1000) / 1000;
+    x = x.toString();
+  }
+}
+
 function checkMaxDigits(){
   console.log("a: " + a + " and " + "b: " + b);
 
-  if (resultValueStr.includes(".") && resultValueStr.length > 8){
+  if (resultValueStr.includes(".") && resultValueStr.length > 4){
     resultValueNum = Math.round(resultValueNum * 1000) / 1000;
     resultValueStr = resultValueNum.toString();
     if (resultValueStr.length > 10) displayError();
     return;
   }
-  
-  // if (resultValueStr.includes(".")){
-  //   resultValueNum = Math.round(resultValueNum * 1000) / 1000;
-  //   resultValueStr = resultValueNum.toString();
-  //   if (resultValueStr.length > 10) displayError();
-  //   return;
-  // }
 
   if (a.includes(".") === false && b.includes(".") === false){
     if (a.length > 10 || b.length > 10){
@@ -400,8 +404,11 @@ btnEquals.addEventListener("click", () => {
   if (b === "" || operatorChosen === ""){
     return;
   }
+  limitDecimlaPlaces(a);
+  limitDecimlaPlaces(b);
   resultValueNum = operate(a, b, operatorChosen);
   resultValueStr = resultValueNum.toString();
+  limitDecimlaPlaces(resultValueStr);
   debugValues();
   checkMaxDigits();
   updateResult();
